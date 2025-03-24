@@ -1,6 +1,6 @@
-# Flex Lexer Project
+# UPL
 
-A lexical analyzer built using for UPL (UET Programming Language
+A compiler built using for UPL (UET Programming Language
 
 ## Dependency
 Ensure you have Flex installed. On most Linux distributions, you can install it via:
@@ -17,7 +17,7 @@ make
 ./upl-lexer
 ```
 
-## ▶️ Running the Lexer
+## Running the Lexer
 Pass an input file to the lexer:
 ```sh
 ./upl-lexer test.upl  # output to stdout
