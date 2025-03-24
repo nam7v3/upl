@@ -12,11 +12,11 @@ const char *g_token_name[] = {
   [TOK_INVALID] = "INVALID",
 };
 
-#define PEEKC(l) (l)->current + 1 >= (l)->buffer.len ? -1 : l->buffer.data[l->current + 1]
-#define CURC(l) l->buffer.data[l->current]
+#define PEEKC(l) ((l)->current + 1 >= (l)->buffer.len ? -1 : l->buffer.data[l->current + 1])
+#define CURC(l) (l->buffer.data[l->current])
 #define END(l) (l->current >= (l)->buffer.len)
 
-static inline void advance(lexer_t *l)
+void advance(lexer_t *l)
 {
   l->current++;
   if (l->current < l->buffer.len) {
@@ -100,7 +100,7 @@ i32 lexer_lex(lexer_t *l, token_data_t *token, arena_t *arena)
 
 #define __PUNC(n, s)
 #define __KEYWORD(n, s)                                                        \
-  if (strncmp(ident.data, s, ident.len) == 0) {                                \
+  if (strlen(s) == ident.len && strncmp(ident.data, s, ident.len) == 0) {                                \
     if (token) {                                                               \
       token->token_type = TOK_##n;                                             \
     }                                                                          \
@@ -149,7 +149,7 @@ i32 lexer_lex(lexer_t *l, token_data_t *token, arena_t *arena)
     // }
     if (token) {
       token->token_type = TOK_NUMBER;
-      token->number.value = 0; // TODO
+      token->number.value = atoi(num); 
     }
     return TOK_NUMBER;
   }

@@ -106,14 +106,15 @@ int main(int argc, char *argv[])
     do {
       token_data_t token_data;
       token = lexer_lex(&lexer, &token_data, &allocator);
+      if(token == TOK_OVER) break;
       fprintf(g_options.outfile, "%s(line=%d, col=%d", g_token_name[token], token_data.file_line, token_data.file_col);
       switch(token_data.token_type)
       {
         case TOK_IDENT:
-          fprintf(g_options.outfile, ",name = \"%.*s\"", token_data.identifer.name.len, token_data.identifer.name.data);
+          fprintf(g_options.outfile, ", name = \"%.*s\"", token_data.identifer.name.len, token_data.identifer.name.data);
           break;
         case TOK_NUMBER:
-          fprintf(g_options.outfile, ", %d", token_data.number.value);
+          fprintf(g_options.outfile, ", value = %d", token_data.number.value);
           break;
       }
       fprintf(g_options.outfile, ")\n");

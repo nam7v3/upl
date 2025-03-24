@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O2 -std=gnu11
+CFLAGS = -g -O2 -std=gnu11
 all: upl-lexer
 
 upl-lexer: src/lexer-flex.o src/lexer-handmade.o src/main.o

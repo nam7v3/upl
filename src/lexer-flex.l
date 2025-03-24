@@ -24,7 +24,7 @@ WS      [ \t\n]
 ">"                { printf("GT(line=%d, col=%d)\n", yylineno, yycolno); yycolno += yyleng; }                  
 "=="               { printf("DEQUAL(line=%d, col=%d)\n", yylineno, yycolno); yycolno += yyleng; }             
 "="                { printf("EQUAL(line=%d, col=%d)\n", yylineno, yycolno); yycolno += yyleng; }               
-{DIGIT}+           { printf("NUM(line=%d, col=%d)(%s)\n", yylineno, yycolno); yycolno += yyleng; }
+{DIGIT}+           { printf("NUM(line=%d, col=%d, value=%s)\n", yylineno, yycolno); yycolno += yyleng; }
 "bool"             { printf("BOOL(line=%d, col=%d)\n", yylineno, yycolno)   ; yycolno += yyleng; }
 "int"              { printf("INT(line=%d, col=%d)\n", yylineno, yycolno)    ; yycolno += yyleng; }
 "if"               { printf("IF(line=%d, col=%d)\n", yylineno, yycolno)     ; yycolno += yyleng; }
@@ -35,7 +35,7 @@ WS      [ \t\n]
 "begin"            { printf("BEGIN(line=%d, col=%d)\n", yylineno, yycolno)  ; yycolno += yyleng; }
 "end"              { printf("END(line=%d, col=%d)\n", yylineno, yycolno)    ; yycolno += yyleng; }
 "print"            { printf("PRINT(line=%d, col=%d)\n", yylineno, yycolno)    ; yycolno += yyleng; }
-{ALPHA}+{DIGIT}*   { printf("IDENTIFIER(line=%d, col=%d, name=%s)\n", yylineno, yycolno, yytext); yycolno += yyleng; }
+{ALPHA}+{DIGIT}*   { printf("IDENTIFIER(line=%d, col=%d, name=\"%s\")\n", yylineno, yycolno, yytext); yycolno += yyleng; }
 {ALPHA}+{ALNUM}*   { printf("IDENTIFIER ERROR: UPL only accpept identifier that start with character and end with number, get %s", yytext); yycolno += yyleng; }
 .                  { printf("UNKNOWN TOKEN(%s)\n", yytext); yycolno += yyleng; }
 %%
